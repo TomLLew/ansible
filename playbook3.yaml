@@ -1,0 +1,28 @@
+---
+- host: hosts
+  become: true
+  tasks: 
+  - name: install open jdk  
+    apt:
+      name: openjdk-8-jdk
+      state: latest
+  - name: GPG key
+    apt_key:
+      url: "https://pkg.jenkins.io/debian/jenkins-ci.org.key"
+      state: present
+  - name: apt repo
+    apt_repository:
+      repo: "deb https://pkg.jenkins.io/debian/jenkins-ci.org.key"
+      state: present
+  - name: jenkins install
+    apt:
+      name: jenkins
+      state: latest
+      update_cache: true
+  - name: jenkins service
+    service:
+      name: jenkins
+      state: started
+
+
+

@@ -1,0 +1,6 @@
+---
+- hosts: hosts
+  tasks:
+
+  - name: install jenkins
+    shell: curl https://raw.githubusercontent.com/TomLLew/Scripts/master/Jenkins-Install.sh | sudo bash
