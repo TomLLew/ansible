@@ -1,0 +1,4 @@
+- hosts: hosts
+  tasks:
+  - name: install docker
+    shell: curl https://raw.githubusercontent.com/TomLLew/Scripts/master/Docker-Install-Script.sh | sudo bash

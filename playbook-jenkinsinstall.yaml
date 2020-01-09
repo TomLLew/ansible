@@ -1,0 +1,39 @@
+---
+- hosts: jenkins
+  become: true
+  tasks:
+  - name: jenkins user
+    user: 
+      name: jenkins
+      shell: /bin/bash 
+  - name: install open jdk  
+    apt:
+      name: openjdk-8-jdk
+      state: latest
+  - name: GPG key
+    apt_key:
+      url: "https://pkg.jenkins.io/debian/jenkins.io.key"
+      state: present
+  - name: apt repo
+    apt_repository:
+      repo: "deb http://pkg.jenkins.io/debian-stable binary/"
+      state: present
+      update_cache: true
+  - name: jenkins install
+    apt:
+      name: jenkins
+      state: latest
+      update_cache: true
+  - shell: |
+      chmod 777 /var/lib/jenkins/secrets/initialAdminPassword    
+      cat /var/lib/jenkins/secrets/initialAdminPassword
+    register: shell_result
+  - debug:
+      var: shell_result.stdout_lines
+  - name: jenkins service
+    service:
+      name: jenkins
+      state: started
+
+
+

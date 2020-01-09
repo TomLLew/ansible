@@ -1,0 +1,10 @@
+---
+- hosts: hosts
+  tasks:
+  - name: Git clone     
+    git:
+      repo: https://github.com/TomLLew/Scripts.git
+      dest: /home/qa-admin/Scripts
+
+       
+       

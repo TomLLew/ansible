@@ -1,0 +1,6 @@
+- hosts: swarm
+  become: true
+  tasks:
+  - name: swarm init
+    docker_swarm:
+      state: present

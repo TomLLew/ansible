@@ -1,0 +1,17 @@
+- hosts: All
+  become: true
+  tasks:
+  - name: pip install
+    apt:
+      name: python-pip
+      state: latest
+      update_cache: true
+  - name: docker sdk
+    pip:
+      name: docker
+  - name: docker registry container
+    docker_container:
+      name: registry
+      image: registry
+      ports:
+      - "5000:5000"
